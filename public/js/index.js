@@ -55,7 +55,6 @@ if (userPasswordForm) {
             'password'
         );
 
-        console.log('imhere');
         document.getElementById('password-current').textContent = '';
         document.getElementById('password').textContent = '';
         document.getElementById('password-confirm').textContent = '';   

@@ -165,7 +165,6 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
             )
         );
     }
-    console.log(distance, lat, lng, unit, radius);
 
     //could not get this query to work
     const tours = await Tour.find({

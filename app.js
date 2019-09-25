@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -42,9 +43,6 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-//log developer or production mode to console
-console.log(process.env.NODE_ENV);
-
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 app.use(
@@ -74,6 +72,8 @@ app.use(
         ]
     })
 );
+
+app.use(compression());
 
 // For Testing - Add time of request to req object
 app.use((req, res, next) => {

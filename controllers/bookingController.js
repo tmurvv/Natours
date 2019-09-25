@@ -40,12 +40,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 exports.createBookingCheckout = catchAsync(async (req, res, next) => {
     const { tour, user, price } = req.query;
-    console.log('here', tour, user, price);
     if (!tour && !user && !price) return next();
-
     await Booking.create({ tour, user, price });
-    console.log('endbook');
-    return res.redirect('http://127.0.0.1:3000/');
+    return res.redirect('/');
 });
 
 exports.getBooking = factory.getOne(Booking, { path: 'bookings' });

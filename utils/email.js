@@ -42,7 +42,6 @@ module.exports = class Email {
     }
 
     async send(template, subject) {
-        console.log('imin');
         //1) render HTML based on template
         const html = pug.renderFile(
             `${__dirname}/../views/email/${template}.pug`,
@@ -69,7 +68,6 @@ module.exports = class Email {
     }
 
     async sendPasswordReset() {
-        console.log('imin passwordreset');
         await this.send(
             'passwordReset',
             'Your password reset, valid for 10 minutes'
