@@ -4,6 +4,7 @@ import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 
 //DOM ELEMENTS
 const mapBox = document.getElementById('map');
@@ -34,15 +35,16 @@ if (userDataForm) {
     userDataForm.addEventListener('submit', e => {
         event.preventDefault();
         const form = new FormData();
-        form.append('name', document.getElementById('name').value )
-        form.append('email', document.getElementById('email').value)
+        form.append('name', document.getElementById('name').value);
+        form.append('email', document.getElementById('email').value);
         form.append('photo', document.getElementById('photo').files[0]);
         updateSettings(form, 'data');
     });
 }
 if (userPasswordForm) {
     userPasswordForm.addEventListener('submit', async e => {
-        document.querySelector('.btn--save-password').textContent = 'Updating...';
+        document.querySelector('.btn--save-password').textContent =
+            'Updating...';
         event.preventDefault();
         const passwordCurrent = document.getElementById('password-current')
             .value;
@@ -51,21 +53,25 @@ if (userPasswordForm) {
             .value;
 
         await updateSettings(
-            { passwordCurrent, password, passwordConfirm }, 
+            { passwordCurrent, password, passwordConfirm },
             'password'
         );
 
         document.getElementById('password-current').textContent = '';
         document.getElementById('password').textContent = '';
-        document.getElementById('password-confirm').textContent = '';   
-        document.querySelector('.btn--save-password').innerText = 'Save Password';
+        document.getElementById('password-confirm').textContent = '';
+        document.querySelector('.btn--save-password').innerText =
+            'Save Password';
     });
 }
 
-if(bookBtn) {
+if (bookBtn) {
     bookBtn.addEventListener('click', e => {
-        e.target.textContent = "Processing..."
+        e.target.textContent = 'Processing...';
         const { tourId } = e.target.dataset;
         bookTour(tourId);
-    })
+    });
 }
+
+const alertMessage = document.querySelector('body').dataset.alert;
+if (alert) showAlert('success', alertMessage, 12);
