@@ -1,5 +1,4 @@
 /* eslint-disable */
-import '@babel/polyfill';
 import { displayMap } from './mapbox';
 import { login, logout } from './login';
 import { updateSettings } from './updateSettings';
@@ -74,4 +73,4 @@ if (bookBtn) {
 }
 
 const alertMessage = document.querySelector('body').dataset.alert;
-if (alert) showAlert('success', alertMessage, 12);
+if (alertMessage) showAlert('success', alertMessage, 12);
